@@ -36,6 +36,11 @@ kubectl exec -it -n zap deploy/zap-owasp-zap -- bash
 ```
 <img width="1056" alt="Screenshot 2024-01-17 at 12 16 17" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/8a8a3550-7d79-4e0c-be7c-175d6c0e08b6">
 
+Introduce an insecure web application called ```storefront``` into the cluster:
+```
+kubectl apply -f https://installer.calicocloud.io/storefront-demo.yaml
+```
+
 If ```zap-cli``` is not available, you can use ```curl``` to send a request to the ZAP API:
 ```
 kubectl exec -it -n zap deploy/zap-owasp-zap -- curl http://localhost:8081/JSON/core/view/status/
