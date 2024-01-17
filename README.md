@@ -104,5 +104,5 @@ helm install falco falcosecurity/falco --namespace falco \
 
 ## Scale down the cluster
 ```
-eksctl scale nodegroup --cluster falco-cluster --name <node-group> --nodes 0
+eksctl scale nodegroup --cluster falco-cluster --name ng-201ab6f7 --nodes 0
 ```
