@@ -45,10 +45,16 @@ kubectl apply -f https://installer.calicocloud.io/storefront-demo.yaml
 
 
 
-If ```zap-cli``` is not available, you can use ```curl``` or the ```zap-full-scan.py``` script to interact with the ZAP API:
+If ```zap-cli``` is not available, you can use ```curl``` or the ```zap-***.py``` scripts to directly interact with the ZAP API:
 ```
-kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-full-scan.py -t http://10.100.244.74:80/
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-api-scan.py -t http://10.100.244.74:80
 ```
+
+Still working on configuring the correct syntax for the PenTest operations
+
+<img width="1429" alt="Screenshot 2024-01-17 at 18 30 30" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/339288fe-2b3c-43cb-b124-fc463bf38cce">
+
+
 
 ## Install Falco and FalcoSideKick
 
