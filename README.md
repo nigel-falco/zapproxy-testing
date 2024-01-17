@@ -43,9 +43,9 @@ kubectl apply -f https://installer.calicocloud.io/storefront-demo.yaml
 
 <img width="947" alt="Screenshot 2024-01-17 at 16 04 49" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/48506aaf-66a4-436e-8969-23fdc852990e">
 
+## Zap API Scan
 
-
-If ```zap-cli``` is not available, you can use ```curl``` or the ```zap-***.py``` scripts to directly interact with the ZAP API:
+Trying to figure out what the ```zap-api-scan.py``` script does:
 ```
 kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-api-scan.py -t http://10.100.244.74:80
 ```
@@ -53,11 +53,19 @@ kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o
 The synax was modified from a similar example that used Docker for performing tests: <br/>
 https://www.fullsecurityengineer.com/headless-web-application-scanning-with-owasp-zap/
 
-<br/><br/>
-
 Still working on configuring the correct syntax for the PenTest operations
 
 <img width="1429" alt="Screenshot 2024-01-17 at 18 30 30" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/339288fe-2b3c-43cb-b124-fc463bf38cce">
+
+## Zap Full Scan
+
+Initially tested the ```-h``` feature flag for the ```zap-full-scan.py``` to ensure I have it correctly configured:
+```
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-full-scan.py -h
+```
+
+<img width="1268" alt="Screenshot 2024-01-17 at 18 57 06" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/a1e9bf9f-5038-49e0-80e5-5187e4018b55">
+
 
 
 
