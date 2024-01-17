@@ -30,10 +30,14 @@ You can then view the exposed webpage at http://localhost:8081
 
 <img width="1204" alt="Screenshot 2024-01-17 at 10 53 31" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/f0a12f3d-7bfc-47d7-870f-7b70198f8625">
 
-Check that Zap Proxy is running correctly:
+Terminal shell into the Zap Proxy pod:
 ```
-kubectl get events -n zap
+kubectl exec -it -n zap deploy/zap-owasp-zap -- bash
 ```
+
+<img width="1056" alt="Screenshot 2024-01-17 at 12 16 17" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/8a8a3550-7d79-4e0c-be7c-175d6c0e08b6">
+
+
 
 ## Install Falco and FalcoSideKick
 
