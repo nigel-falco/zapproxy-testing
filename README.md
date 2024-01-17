@@ -66,7 +66,14 @@ kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o
 
 <img width="1268" alt="Screenshot 2024-01-17 at 18 57 06" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/a1e9bf9f-5038-49e0-80e5-5187e4018b55">
 
+## Exporting a report
 
+The output of the full scan only prints the status of the checks, but does not tell any findings that the OWASP ZAP found during the assessment. <br/>
+In order to obtain a report from OWASP ZAP, you may run the following command to write in the current path, a report called ```test_report.html```.
+
+```
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-full-scan.py -g gen-conf -r test_report.html -t http://10.100.244.74:80
+```
 
 
 ## Install Falco and FalcoSideKick
