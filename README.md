@@ -23,6 +23,13 @@ kubectl apply -f https://raw.githubusercontent.com/nigel-falco/zapproxy-testing/
 kubectl port-forward service/zap-owasp-zap 8081:8081 -n zap
 ```
 
+<img width="1036" alt="Screenshot 2024-01-17 at 10 52 45" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/6e5b5af9-c154-4678-9356-bee396e299c4">
+
+
+You can then view the exposed webpage at http://localhost:8081
+
+<img width="1204" alt="Screenshot 2024-01-17 at 10 53 31" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/f0a12f3d-7bfc-47d7-870f-7b70198f8625">
+
 Check that Zap Proxy is running correctly:
 ```
 kubectl get events -n zap
