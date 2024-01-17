@@ -45,18 +45,9 @@ kubectl apply -f https://installer.calicocloud.io/storefront-demo.yaml
 
 
 
-If ```zap-cli``` is not available, you can use ```curl``` to send a request to the ZAP API:
+If ```zap-cli``` is not available, you can use ```curl``` or the ```zap-full-scan.py``` script to interact with the ZAP API:
 ```
-kubectl exec -it -n zap deploy/zap-owasp-zap -- curl http://localhost:8081/JSON/core/view/status/
-```
-
-This command sends a request to the ZAP API to view the current status. <br/>
-It assumes that ZAP's API is available on port 8081, as specified in your deployment.
-<br/><br/>
-The response from either of these commands should give you an indication of whether ZAP is running correctly. <br/>
-If the pod is not responding or you encounter errors, you'll need to investigate further, possibly by checking the pod's logs 
-```
-kubectl logs <pod_name> -n zap
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-full-scan.py -t http://10.100.244.74:80/
 ```
 
 ## Install Falco and FalcoSideKick
