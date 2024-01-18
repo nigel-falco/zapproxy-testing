@@ -101,7 +101,9 @@ helm install falco falcosecurity/falco --namespace falco \
   --set "falcoctl.config.artifact.follow.refs={falco-rules:2,falco-incubating-rules:2,falco-sandbox-rules:2}" \
   --set "falco.rules_file={/etc/falco/falco_rules.yaml,/etc/falco/falco-incubating_rules.yaml,/etc/falco/falco-sandbox_rules.yaml,/etc/falco/rules.d}"
 ```
-
+```
+kubectl port-forward svc/falco-falcosidekick-ui -n falco 2802 --insecure-skip-tls-verify
+```
 ## Scale down the cluster
 ```
 eksctl scale nodegroup --cluster falco-cluster --name ng-201ab6f7 --nodes 0
