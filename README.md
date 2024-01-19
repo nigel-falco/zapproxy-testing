@@ -119,6 +119,15 @@ We need to modify this scan command to get it working:
 kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-baseline.py -t http://falco-falcosidekick-ui.falco.svc.cluster.local:2802/ -r /zap/wrk/report.html -d /zap/wrk/
 ```
 
+Failed to access summary file ```/home/zap/zap_out.json``` <br/>
+I ran ```cat zap.yaml``` to see the output directory and it's correct:
+
+```
+- parameters:
+    format: Long
+    summaryFile: /home/zap/zap_out.json
+```
+
 ## Install Falco and FalcoSideKick
 
 ```
