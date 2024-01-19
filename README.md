@@ -113,8 +113,11 @@ To prevent add-ons (inadvertently) use/override core files ZAP will not start (a
 
 <img width="1400" alt="Screenshot 2024-01-19 at 11 46 06" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/62e50580-3ec4-49c9-a190-7bdfe0d4379d">
 
-
-
+The previous script only initiatates Zap Proxy, but doesn't perform the scan. <br/>
+We need to modify this scan command to get it working:
+```
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap-baseline.py -t http://falco-falcosidekick-ui.falco.svc.cluster.local:2802/ -r /zap/wrk/report.html -d /zap/wrk/
+```
 
 ## Install Falco and FalcoSideKick
 
