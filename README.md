@@ -96,7 +96,25 @@ Using JVM args: -Xmx3950m
 The home directory is already in use. Ensure no other ZAP instances are running with the same home directory: /home/zap/.ZAP/
 command terminated with exit code 1
 ```
+There is a thread on this issue:
 https://groups.google.com/g/zaproxy-users/c/rycqNK0SFRE
+
+I fixed the command to point to a new ```$HOME``` directory:
+```
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap.sh -daemon -port 8090 -host 0.0.0.0 -dir /home/zap/.ZAP-instance1/
+```
+Use the ```-dir``` argument to specify a different home. <br/>
+https://www.zaproxy.org/docs/desktop/cmdline/#options
+<br/><br/>
+The homes can't be shared by two ZAP instances running concurrently. <br/>
+The ```-dir``` flag uses the specified directory as home directory, instead of the default one.
+<br/><br/>
+To prevent add-ons (inadvertently) use/override core files ZAP will not start (and show an error) if the home and the installation directories are the same.
+
+<img width="1400" alt="Screenshot 2024-01-19 at 11 46 06" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/62e50580-3ec4-49c9-a190-7bdfe0d4379d">
+
+
+
 
 ## Install Falco and FalcoSideKick
 
