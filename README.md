@@ -85,7 +85,18 @@ kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o
 
 <img width="1268" alt="Screenshot 2024-01-17 at 19 24 02" src="https://github.com/nigel-falco/zapproxy-testing/assets/152274017/8ec993a8-b1c6-48cf-adb0-d512ac7c72bd">
 
-
+## 2 Concurrent Zap Instances Running
+```
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=owasp-zap -n zap -o jsonpath="{.items[0].metadata.name}") -n zap -- zap.sh -daemon -port 8090 -host 0.0.0.0
+```
+```
+Found Java version 11.0.21
+Available memory: 15802 MB
+Using JVM args: -Xmx3950m
+The home directory is already in use. Ensure no other ZAP instances are running with the same home directory: /home/zap/.ZAP/
+command terminated with exit code 1
+```
+https://groups.google.com/g/zaproxy-users/c/rycqNK0SFRE
 
 ## Install Falco and FalcoSideKick
 
