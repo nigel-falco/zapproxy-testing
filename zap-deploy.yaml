@@ -52,6 +52,8 @@ spec:
               api.disablekey=true -config api.addrs.addr.name=.* -config
               api.addrs.addr.regex=true
           image: 'owasp/zap2docker-stable:latest'
+          securityContext:
+            privileged: true
           imagePullPolicy: IfNotPresent
           name: owasp-zap
           ports:
