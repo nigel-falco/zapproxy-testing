@@ -44,21 +44,25 @@ spec:
         app.kubernetes.io/name: owasp-zap
     spec:
       containers:
-        - command:
-            - sh
-            - '-c'
-            - >-
-              /bin/bash /zap/zap.sh -daemon -port 8081 -host 0.0.0.0 -config
-              api.disablekey=true -config api.addrs.addr.name=.* -config
-              api.addrs.addr.regex=true
-          image: 'owasp/zap2docker-stable:latest'
-          securityContext:
-            privileged: true
-          imagePullPolicy: IfNotPresent
-          name: owasp-zap
-          ports:
-            - containerPort: 8081
-              name: http
+      - command:
+        - sh
+        - '-c'
+        - >-
+          /bin/bash /zap/zap.sh -daemon -port 8081 -host 0.0.0.0 -config
+          api.disablekey=true -config api.addrs.addr.name=.* -config
+          api.addrs.addr.regex=true
+        image: 'owasp/zap2docker-stable:latest'
+        imagePullPolicy: IfNotPresent
+        name: owasp-zap
+        ports:
+        - containerPort: 8081
+          name: http
+        volumeMounts:
+        - name: zap-work-dir
+          mountPath: /zap/wrk
+      volumes:
+      - name: zap-work-dir
+        emptyDir: {}
 
 ---
 apiVersion: networking.k8s.io/v1
